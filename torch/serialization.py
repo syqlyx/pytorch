@@ -813,11 +813,8 @@ def _load(zip_file, map_location, pickle_module, **pickle_load_args):
     def load_tensor(obj, size, key, location):
         loaded_storages[key] = restore_location(obj, location)
         name = 'data/{}'.format(key)
-        if location == 'cpu':
-            size_long = struct.pack("<Q", size)
-            tensor_file = io.BytesIO(size_long + zip_file.get_record(name))
-        else:
-            tensor_file = io.BytesIO(zip_file.get_record(name))
+        size_long = struct.pack("<Q", size)
+        tensor_file = io.BytesIO(size_long + zip_file.get_record(name))
         offset = None
         is_real_file = False
         loaded_storages[key]._set_from_file(tensor_file, offset, is_real_file)

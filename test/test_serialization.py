@@ -527,7 +527,7 @@ class SerializationMixin(object):
 
 
 class serialization_method(object):
-    def __init__(self, *, use_zip):
+    def __init__(self, use_zip):
         self.use_zip = use_zip
         self.torch_save = torch.save
 
@@ -670,5 +670,3 @@ class TestSerialization(TestCase, SerializationMixin):
 
 if __name__ == '__main__':
     run_tests()
-
-
