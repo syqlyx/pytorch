@@ -212,14 +212,31 @@ std::shared_ptr<FutureMessage> RequestCallbackImpl::processRpc(
 
       // Process the original RPC.
       auto wrappedMessageType = rpcWithAutograd.wrappedMessageType();
-      auto wrappedRpcResponse = processRpc(
+      // Kick off processing for the nested future and get a Future<T> to the
+      // result.
+      auto wrappedRpcResponseFuture = processRpc(
           rpcWithAutograd.wrappedRpc(), wrappedMessageType, messageId);
-      wrappedRpcResponse->waitNoThrow(); // TODO: make async
 
-      return wrap(getMessageWithAutograd(
-          rpcWithAutograd.fromWorkerId(),
-          std::move(*wrappedRpcResponse).moveValue(),
-          MessageType::FORWARD_AUTOGRAD_RESP));
+      // Make an overall future for the wrapped response.
+      auto responseFuture = std::make_shared<rpc::FutureMessage>();
+      auto fromWorkerId = rpcWithAutograd.fromWorkerId();
+      // The original future needs to be marked as completed when the wrapped
+      // one completes, with the autograd context information wrapped.
+      wrappedRpcResponseFuture->addCallback(
+          [responseFuture, messageId, fromWorkerId, wrappedRpcResponseFuture](
+              const Message& m,
+              const c10::optional<utils::FutureError>& error) {
+            if (error) {
+              // Propagate error to responseFuture if we had one.
+              responseFuture->setError(error->what());
+            } else {
+              responseFuture->markCompleted(getMessageWithAutograd(
+                  fromWorkerId,
+                  std::move(*wrappedRpcResponseFuture).moveValue(),
+                  MessageType::FORWARD_AUTOGRAD_RESP));
+            }
+          });
+      return responseFuture;
     }
     case MessageType::BACKWARD_AUTOGRAD_REQ: {
       auto& gradientsCall = static_cast<PropagateGradientsReq&>(rpc);
