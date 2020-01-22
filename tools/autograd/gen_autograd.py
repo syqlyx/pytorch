@@ -30,9 +30,7 @@ from collections import defaultdict
 from .utils import YamlLoader, split_name_params
 
 # See NOTE [ Autograd View Variables ] in variable.h for details.
-# A map: function name => two options:
-#      1. name of the argument that all outputs are view of
-#      2. map: output idx => name of the argument that this result is view of
+# A map: function name => name of the argument that all outputs are view of
 VIEW_FUNCTIONS = {
     'numpy_T': 'self',
     'alias': 'self',
@@ -68,6 +66,21 @@ VIEW_FUNCTIONS = {
 # returns a view of its inputs
 RETURNS_VIEWS_OF_INPUT = set(VIEW_FUNCTIONS.keys()).union({'chunk', 'narrow'})
 
+# note: some VIEW_FUNCTIONS are returning multiple views. This means that the engine
+# has to forbid inplace operations on their reults. If such function is only doing views
+# and is added to the list below, in the case where an inplace operation is performed on
+# the output, the custom backward defined in derivatives.yaml will be ignored and we
+# will use the view informations to create a valid graph where each output is the output
+# of a separate Node (AsStridedBackward) that has one output each.
+# A function should be added to this list if:
+# - You want to allow inplace modification of the result.
+# - You are aware that inplace modification of the output will change the memory usage of the
+#   backward as the multiple Nodes we create will force the gradient buffer to be created
+#   for each Node, instead of once in the original multi-output Node.
+# A function should NOT be added to this list if:
+# - Your backward function does more than just the backward of the views.
+# If you update this list, please update "test_multi_view_methods" in test_autograd.py
+PURE_VIEW_FUNCTIONS = ['split', 'split_with_sizes', 'unbind']
 
 def format_return_type(returns):
     if len(returns) == 0:
