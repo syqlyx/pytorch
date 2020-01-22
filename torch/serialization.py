@@ -445,7 +445,7 @@ def _legacy_save(obj, f, pickle_module, pickle_protocol):
     pickle_module.dump(serialized_storage_keys, f, protocol=pickle_protocol)
     f.flush()
     for key in serialized_storage_keys:
-        serialized_storages[key]._write_file(f, _should_read_directly(f))
+        serialized_storages[key]._write_file(f, _should_read_directly(f), True)
 
 
 def _save(obj, zip_file, pickle_module, pickle_protocol):
@@ -483,7 +483,7 @@ def _save(obj, zip_file, pickle_module, pickle_protocol):
         name = 'data/{}'.format(key)
         storage = serialized_storages[key]
         if storage.device.type == 'cpu':
-            # Copy data from tensor directly into zip archive
+            # If it's on the CPU we can directly copy it into the zip file
             num_bytes = storage.size() * storage.element_size()
             buf = io.BytesIO()
             zip_file.write_record(name, storage.data_ptr(), num_bytes)
