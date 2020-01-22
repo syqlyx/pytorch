@@ -48,9 +48,7 @@ static bool EmbeddingLookupIdx_int32_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -164,9 +162,7 @@ static bool EmbeddingLookupIdx_int32_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -240,9 +236,7 @@ static bool EmbeddingLookupIdx_int32_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -296,9 +290,7 @@ static bool EmbeddingLookupIdx_int32_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -348,10 +340,8 @@ static bool EmbeddingLookupIdx_int32_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
@@ -490,9 +480,7 @@ static bool EmbeddingLookupIdx_int64_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -606,9 +594,7 @@ static bool EmbeddingLookupIdx_int64_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -682,9 +668,7 @@ static bool EmbeddingLookupIdx_int64_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -738,9 +722,7 @@ static bool EmbeddingLookupIdx_int64_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -790,10 +772,8 @@ static bool EmbeddingLookupIdx_int64_t_float_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
@@ -932,9 +912,7 @@ static bool EmbeddingLookupIdx_int32_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -1108,9 +1086,7 @@ static bool EmbeddingLookupIdx_int32_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -1214,9 +1190,7 @@ static bool EmbeddingLookupIdx_int32_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -1285,9 +1259,7 @@ static bool EmbeddingLookupIdx_int32_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -1346,10 +1318,8 @@ static bool EmbeddingLookupIdx_int32_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
@@ -1494,9 +1464,7 @@ static bool EmbeddingLookupIdx_int64_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -1670,9 +1638,7 @@ static bool EmbeddingLookupIdx_int64_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -1776,9 +1742,7 @@ static bool EmbeddingLookupIdx_int64_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -1847,9 +1811,7 @@ static bool EmbeddingLookupIdx_int64_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -1908,10 +1870,8 @@ static bool EmbeddingLookupIdx_int64_t_half_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
@@ -2056,9 +2016,7 @@ static bool EmbeddingLookupIdx_int32_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -2234,9 +2192,7 @@ static bool EmbeddingLookupIdx_int32_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -2343,9 +2299,7 @@ static bool EmbeddingLookupIdx_int32_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -2418,9 +2372,7 @@ static bool EmbeddingLookupIdx_int32_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
@@ -2482,10 +2434,8 @@ static bool EmbeddingLookupIdx_int32_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
@@ -2631,9 +2581,7 @@ static bool EmbeddingLookupIdx_int64_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -2809,9 +2757,7 @@ static bool EmbeddingLookupIdx_int64_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -2918,9 +2864,7 @@ static bool EmbeddingLookupIdx_int64_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -2993,9 +2937,7 @@ static bool EmbeddingLookupIdx_int64_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int64_t end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
+      int64_t end_offset = offsets[rangeIndex + 1];
       int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
@@ -3057,10 +2999,8 @@ static bool EmbeddingLookupIdx_int64_t_uint8_t_float__avx2_fma(
       if (dataInd != offsets[rangeIndex]) {
         return false;
       }
-      int end_offset =
-          (rangeIndex == output_size - 1 ? index_size
-                                         : offsets[rangeIndex + 1]);
-      int length = end_offset - offsets[rangeIndex];
+      int64_t end_offset = offsets[rangeIndex + 1];
+      int64_t length = end_offset - offsets[rangeIndex];
       for (int64_t start = dataInd; dataInd < end_offset; ++dataInd) {
         const int64_t idx = indices[dataInd];
         if (idx < 0 || idx >= data_size) {
